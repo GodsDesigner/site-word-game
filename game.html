@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Word Game</title>
+    <link rel="stylesheet" href="game.css">
+</head>
+<body class="default"> <!-- Add a default theme class to the body -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Go to Home</a></li>
+            </ul>
+        </nav>
+        <h1>Site Word Game</h1>
+    </header>
+    <main>
+        <div class="container">
+            <div id="setup-card" class="card">
+                <h2>Game Setup</h2>
+                <label for="num-words">Number of Words:</label>
+                <select id="num-words">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                </select>
+                <label for="difficulty">Difficulty:</label>
+                <select id="difficulty">
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+                <label for="theme-select">Select Theme:</label>
+                <select id="theme-select" class="btn">
+                    <option value="default">Default</option>
+                    <option value="dark">Dark</option>
+                    <option value="light">Light</option>
+                </select>
+                <div>
+                    <label for="custom-word">Add Custom Word:</label>
+                    <input type="text" id="custom-word" class="input-field">
+                    <button id="add-word-btn" class="btn">Add Word</button>
+                </div>
+                <button id="start-btn" class="btn">Start Game</button>
+                <ul id="custom-words-list" class="word-list"></ul>
+            </div>
+            <div id="game-card" class="card" style="display:none;">
+                <div id="word-display" class="word-display">Word</div>
+                <div class="timer-container">
+                    <div id="timer" class="timer">00:10</div>
+                    <button id="pause-btn" class="btn pause-btn">Pause</button>
+                </div>
+                <div class="buttons">
+                    <button id="correct-btn" class="btn correct-btn">Correct</button>
+                    <button id="incorrect-btn" class="btn incorrect-btn">Incorrect</button>
+                </div>
+                <div id="score" class="score">Score: 0</div>
+            </div>
+            <div id="game-over-card" class="card game-over-card" style="display:none;">
+                <h2>Game Over</h2>
+                <p id="final-score"></p>
+                <button id="restart-btn" class="btn">Restart Game</button>
+            </div>
+            <!-- Popup message div -->
+            <div id="popup-message" class="popup" style="display:none;">
+                <p id="popup-text"></p>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Site Word Game</p>
+    </footer>
+
+    <!-- Add these audio elements -->
+    <audio id="correct-sound" src="sounds/correct.mp3"></audio>
+    <audio id="incorrect-sound" src="sounds/incorrect.mp3"></audio>
+    <audio id="background-music" src="sounds/background.mp3" loop></audio>
+
+    <script src="game.js"></script>
+</body>
+</html>
