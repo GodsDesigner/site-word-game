@@ -194,12 +194,9 @@ select {
     right: 20%; /* Move it closer to the top */
     left: 70%;
     transform: translate(-50%, -20%);
-    backdrop-filter: blur(10px); /* Glassy effect */
-    -webkit-backdrop-filter: blur(10px);
     color: #333;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     font-size: 1.2em;
     z-index: 1000;
