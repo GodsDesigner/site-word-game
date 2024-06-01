@@ -152,9 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
         numWords = parseInt(document.getElementById('num-words').value, 10); // Ensure numWords is correctly parsed
         difficulty = document.getElementById('difficulty').value;
         const wordType = wordTypeSelect.value;
-        if (wordType === 'abc') {
-            words = shuffleArray(siteWords[wordType]);
-        } else if (wordType === 'blending') {
+        if (wordType === 'abc' || wordType === 'blending') {
             words = shuffleArray(siteWords[wordType]);
         } else {
             words = siteWords[difficulty].slice(0, numWords).concat(customWords); // Include custom words
@@ -274,6 +272,12 @@ document.addEventListener('DOMContentLoaded', () => {
             [array[i], array[j]] = [array[j], array[i]];
         }
         return array;
+    }
+
+    function navigateToGameSetup() {
+        document.getElementById('setup-card').style.display = 'block';
+        document.getElementById('game-card').style.display = 'none';
+        document.getElementById('game-over-card').style.display = 'none';
     }
 
     navigateToGameSetup(); // Initial setup
