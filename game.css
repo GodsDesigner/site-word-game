@@ -437,3 +437,41 @@ footer {
         padding: 6px 12px;
     }
 }
+
+/* Fixes for Add Custom box */
+.add-custom-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto; /* Center the container */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.add-custom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.add-custom input,
+.add-custom button {
+    width: 100%;
+    margin-top: 10px;
+}
+
+@media (max-width: 480px) {
+    .add-custom {
+        padding: 15px;
+    }
+
+    .add-custom input,
+    .add-custom button {
+        font-size: 0.9em;
+    }
+}
