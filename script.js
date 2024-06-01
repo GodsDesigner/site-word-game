@@ -15,9 +15,29 @@ document.addEventListener('DOMContentLoaded', () => {
     let difficulty = 'easy';
 
     const siteWords = {
-        easy: ["cat", "dog", "sun", "moon", "star", "ball", "book", "car", "hat", "pen"],
-        medium: ["apple", "banana", "cherry", "date", "elderberry", "fig", "grape", "honeydew", "kiwi", "lemon"],
-        hard: ["elephant", "giraffe", "hippopotamus", "rhinoceros", "crocodile", "pterodactyl", "tyrannosaurus", "triceratops", "stegosaurus", "brachiosaurus"]
+        easy: [
+            "cat", "dog", "sun", "moon", "star", "ball", "book", "car", "hat", "pen",
+            "a", "and", "away", "big", "blue", "can", "come", "down", "find", "for",
+            "fun", "go", "help", "here", "I", "in", "is", "it", "jump", "little", "look",
+            "make", "me", "my", "not", "one", "play", "red", "run", "said", "see", "the",
+            "three", "to", "two", "up", "we", "where", "yellow", "you"
+        ],
+        medium: [
+            "apple", "banana", "cherry", "date", "elderberry", "fig", "grape", "honeydew", "kiwi", "lemon",
+            "after", "again", "air", "also", "animal", "another", "any", "around", "ask", "back",
+            "because", "before", "boy", "change", "does", "end", "every", "fly", "follow", "food",
+            "give", "great", "hand", "home", "just", "kind", "large", "learn", "letter", "live",
+            "man", "most", "mother", "move", "much", "name", "need", "off", "only", "open",
+            "over", "place", "read", "right", "same", "should", "show", "small", "sound", "spell"
+        ],
+        hard: [
+            "elephant", "giraffe", "hippopotamus", "rhinoceros", "crocodile", "pterodactyl", "tyrannosaurus", "triceratops", "stegosaurus", "brachiosaurus",
+            "america", "answer", "different", "does", "even", "found", "going", "house", "large", "letter",
+            "little", "mother", "much", "name", "number", "people", "place", "school", "sound", "spell",
+            "still", "study", "such", "take", "thank", "thing", "think", "together", "try", "turn",
+            "under", "until", "very", "walk", "watch", "water", "were", "while", "which", "world",
+            "would", "write", "year"
+        ]
     };
 
     if (ageCards.length > 0) {

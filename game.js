@@ -1,18 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const ageCards = document.querySelectorAll('.age-card');
     const startBtn = document.getElementById('start-btn');
     const restartBtn = document.getElementById('restart-btn');
     const correctBtn = document.getElementById('correct-btn');
     const incorrectBtn = document.getElementById('incorrect-btn');
     const pauseBtn = document.getElementById('pause-btn');
     const themeSelect = document.getElementById('theme-select');
-    const toggleMusicBtn = document.getElementById('toggle-music');
-    const correctSound = document.getElementById('correct-sound');
-    const incorrectSound = document.getElementById('incorrect-sound');
-    const backgroundMusic = document.getElementById('background-music');
     const addWordBtn = document.getElementById('add-word-btn');
     const customWordInput = document.getElementById('custom-word');
     const customWordsList = document.getElementById('custom-words-list');
+    const wordTypeSelect = document.getElementById('word-type');
 
     let words = [];
     let currentWordIndex = 0;
@@ -21,14 +17,42 @@ document.addEventListener('DOMContentLoaded', () => {
     let isPaused = false;
     let numWords = 10;
     let difficulty = 'easy';
-    let isMusicPlaying = true;
-    let achievements = [];
     let customWords = JSON.parse(localStorage.getItem('customWords')) || [];
+    let achievements = [];
 
     const siteWords = {
-        easy: ["cat", "dog", "sun", "moon", "star", "ball", "book", "car", "hat", "pen"],
-        medium: ["apple", "banana", "cherry", "date", "elderberry", "fig", "grape", "honeydew", "kiwi", "lemon"],
-        hard: ["elephant", "giraffe", "hippopotamus", "rhinoceros", "crocodile", "pterodactyl", "tyrannosaurus", "triceratops", "stegosaurus", "brachiosaurus"]
+        easy: [
+            "cat", "dog", "sun", "moon", "star", "ball", "book", "car", "hat", "pen",
+            "a", "and", "away", "big", "blue", "can", "come", "down", "find", "for",
+            "fun", "go", "help", "here", "I", "in", "is", "it", "jump", "little", "look",
+            "make", "me", "my", "not", "one", "play", "red", "run", "said", "see", "the",
+            "three", "to", "two", "up", "we", "where", "yellow", "you"
+        ],
+        medium: [
+            "apple", "banana", "cherry", "date", "elderberry", "fig", "grape", "honeydew", "kiwi", "lemon",
+            "after", "again", "air", "also", "animal", "another", "any", "around", "ask", "back",
+            "because", "before", "boy", "change", "does", "end", "every", "fly", "follow", "food",
+            "give", "great", "hand", "home", "just", "kind", "large", "learn", "letter", "live",
+            "man", "most", "mother", "move", "much", "name", "need", "off", "only", "open",
+            "over", "place", "read", "right", "same", "should", "show", "small", "sound", "spell"
+        ],
+        hard: [
+            "elephant", "giraffe", "hippopotamus", "rhinoceros", "crocodile", "pterodactyl", "tyrannosaurus", "triceratops", "stegosaurus", "brachiosaurus",
+            "america", "answer", "different", "does", "even", "found", "going", "house", "large", "letter",
+            "little", "mother", "much", "name", "number", "people", "place", "school", "sound", "spell",
+            "still", "study", "such", "take", "thank", "thing", "think", "together", "try", "turn",
+            "under", "until", "very", "walk", "watch", "water", "were", "while", "which", "world",
+            "would", "write", "year"
+        ],
+        abc: [
+            "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
+        ],
+        blending: [
+            "at", "bat", "cat", "hat", "rat", "sat", "mat", "fat", "pat", "vat",
+            "can", "fan", "man", "pan", "tan", "van", "ran", "ban", "plan", "scan",
+            "blend", "black", "block", "blush", "clap", "clean", "clip", "clock", "flag", "flash",
+            "flip", "glad", "glass", "glow", "plan", "plant", "plum", "slide", "slip", "slim"
+        ]
     };
 
     function displayCustomWords() {
@@ -61,17 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     displayCustomWords();
 
-    // Existing code continues...
-
-    if (ageCards.length > 0) {
-        ageCards.forEach(card => {
-            card.addEventListener('click', (event) => {
-                const ageGroup = card.getAttribute('data-age-group');
-                navigateToGame(ageGroup);
-            });
-        });
-    }
-
     if (startBtn) {
         startBtn.addEventListener('click', () => {
             startGame();
@@ -81,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (correctBtn) {
         correctBtn.addEventListener('click', () => {
-            correctSound.play();
+            document.getElementById('correct-sound').play();
             score++;
             updateScore();
             showPopup();
@@ -93,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (incorrectBtn) {
         incorrectBtn.addEventListener('click', () => {
-            incorrectSound.play();
+            document.getElementById('incorrect-sound').play();
             score--;  // Decrement the score
             updateScore();
             incorrectBtn.classList.add('incorrect-animation');
@@ -107,9 +120,9 @@ document.addEventListener('DOMContentLoaded', () => {
             isPaused = !isPaused;
             pauseBtn.textContent = isPaused ? 'Resume' : 'Pause';
             if (isPaused) {
-                backgroundMusic.pause();
+                document.getElementById('background-music').pause();
             } else {
-                backgroundMusic.play();
+                document.getElementById('background-music').play();
             }
         });
     }
@@ -121,76 +134,39 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (toggleMusicBtn) {
-        toggleMusicBtn.addEventListener('click', () => {
-            if (isMusicPlaying) {
-                backgroundMusic.pause();
-                toggleMusicBtn.textContent = 'Play Music';
-            } else {
-                backgroundMusic.play();
-                toggleMusicBtn.textContent = 'Pause Music';
-            }
-            isMusicPlaying = !isMusicPlaying;
-        });
-    }
-
     themeSelect.addEventListener('change', (event) => {
         const theme = event.target.value;
         document.body.className = theme; // Apply the selected theme to the body
     });
 
-    function navigateToGame(ageGroup) {
-        window.location.href = `game.html?ageGroup=${ageGroup}`;
-    }
-
-    function navigateToGameSetup() {
-        const setupCard = document.getElementById('setup-card');
-        const gameCard = document.getElementById('game-card');
-        const gameOverCard = document.getElementById('game-over-card');
-
-        if (setupCard && gameCard && gameOverCard) {
-            setupCard.style.display = 'block';
-            gameCard.style.display = 'none';
-            gameOverCard.style.display = 'none';
-        }
-    }
-
     function showGameCard() {
-        const setupCard = document.getElementById('setup-card');
-        const gameCard = document.getElementById('game-card');
-        const gameOverCard = document.getElementById('game-over-card');
-
-        if (setupCard && gameCard && gameOverCard) {
-            setupCard.style.display = 'none';
-            gameCard.style.display = 'block';
-            gameOverCard.style.display = 'none';
-        }
+        document.getElementById('setup-card').style.display = 'none';
+        document.getElementById('game-card').style.display = 'block';
+        document.getElementById('game-over-card').style.display = 'none';
     }
 
     function startGame() {
         score = 0;
         currentWordIndex = 0;
         isPaused = false;
-        numWords = parseInt(document.getElementById('num-words').value);
+        numWords = parseInt(document.getElementById('num-words').value, 10); // Ensure numWords is correctly parsed
         difficulty = document.getElementById('difficulty').value;
-        words = siteWords[difficulty].slice(0, numWords).concat(customWords); // Include custom words
+        const wordType = wordTypeSelect.value;
+        if (wordType === 'abc') {
+            words = shuffleArray(siteWords[wordType]);
+        } else {
+            words = siteWords[wordType].slice(0, numWords).concat(customWords); // Include custom words
+        }
         displayWord();
         startTimer();
         updateScore();
     }
 
     function navigateToGameOver() {
-        const setupCard = document.getElementById('setup-card');
-        const gameCard = document.getElementById('game-card');
-        const gameOverCard = document.getElementById('game-over-card');
-        const finalScore = document.getElementById('final-score');
-
-        if (setupCard && gameCard && gameOverCard && finalScore) {
-            setupCard.style.display = 'none';
-            gameCard.style.display = 'none';
-            gameOverCard.style.display = 'block';
-            finalScore.textContent = `Your final score is ${score}`;
-        }
+        document.getElementById('setup-card').style.display = 'none';
+        document.getElementById('game-card').style.display = 'none';
+        document.getElementById('game-over-card').style.display = 'block';
+        document.getElementById('final-score').textContent = `Your final score is ${score}`;
     }
 
     function displayWord() {
@@ -257,6 +233,10 @@ document.addEventListener('DOMContentLoaded', () => {
         isPaused = false;
         updateScore();
         updateTimerDisplay(10);
+        displayWord();
+        document.getElementById('setup-card').style.display = 'block';
+        document.getElementById('game-card').style.display = 'none';
+        document.getElementById('game-over-card').style.display = 'none';
     }
 
     function showPopup() {
@@ -286,6 +266,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Add more achievements as needed
     }
 
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
     navigateToGameSetup(); // Initial setup
 });
-

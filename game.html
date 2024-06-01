@@ -6,7 +6,7 @@
     <title>Site Word Game</title>
     <link rel="stylesheet" href="game.css">
 </head>
-<body class="default"> <!-- Add a default theme class to the body -->
+<body class="default">
     <header>
         <nav>
             <ul>
@@ -37,6 +37,16 @@
                     <option value="dark">Dark</option>
                     <option value="light">Light</option>
                 </select>
+                <label for="word-type">Word Type:</label>
+                <select id="word-type">
+                    <optgroup label="Site Words">
+                        <option value="normal">Site Words</option>
+                    </optgroup>
+                    <optgroup label="Alphabet Games">
+                        <option value="abc">ABC's</option>
+                        <option value="blending">Blending Words</option>
+                    </optgroup>
+                </select>
                 <div>
                     <label for="custom-word">Add Custom Word:</label>
                     <input type="text" id="custom-word" class="input-field">
@@ -62,7 +72,6 @@
                 <p id="final-score"></p>
                 <button id="restart-btn" class="btn">Restart Game</button>
             </div>
-            <!-- Popup message div -->
             <div id="popup-message" class="popup" style="display:none;">
                 <p id="popup-text"></p>
             </div>
@@ -72,7 +81,6 @@
         <p>&copy; 2024 Site Word Game</p>
     </footer>
 
-    <!-- Add these audio elements -->
     <audio id="correct-sound" src="sounds/correct.mp3"></audio>
     <audio id="incorrect-sound" src="sounds/incorrect.mp3"></audio>
     <audio id="background-music" src="sounds/background.mp3" loop></audio>
