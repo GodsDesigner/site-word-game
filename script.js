@@ -1,10 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const ageCards = document.querySelectorAll('.age-card');
     const startBtn = document.getElementById('start-btn');
     const restartBtn = document.getElementById('restart-btn');
     const correctBtn = document.getElementById('correct-btn');
     const incorrectBtn = document.getElementById('incorrect-btn');
     const pauseBtn = document.getElementById('pause-btn');
+    const themeSelect = document.getElementById('theme-select');
+    const addWordBtn = document.getElementById('add-word-btn');
+    const customWordInput = document.getElementById('custom-word');
+    const customWordsList = document.getElementById('custom-words-list');
+    const wordTypeSelect = document.getElementById('word-type');
 
     let words = [];
     let currentWordIndex = 0;
@@ -13,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let isPaused = false;
     let numWords = 10;
     let difficulty = 'easy';
+    let customWords = JSON.parse(localStorage.getItem('customWords')) || [];
+    let achievements = [];
 
     const siteWords = {
         easy: [
@@ -37,39 +43,74 @@ document.addEventListener('DOMContentLoaded', () => {
             "still", "study", "such", "take", "thank", "thing", "think", "together", "try", "turn",
             "under", "until", "very", "walk", "watch", "water", "were", "while", "which", "world",
             "would", "write", "year"
+        ],
+        abc: [
+            "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
+        ],
+        blending: [
+            "at", "bat", "cat", "hat", "rat", "sat", "mat", "fat", "pat", "vat",
+            "can", "fan", "man", "pan", "tan", "van", "ran", "ban", "plan", "scan",
+            "blend", "black", "block", "blush", "clap", "clean", "clip", "clock", "flag", "flash",
+            "flip", "glad", "glass", "glow", "plan", "plant", "plum", "slide", "slip", "slim"
         ]
     };
 
-    if (ageCards.length > 0) {
-        ageCards.forEach(card => {
-            card.addEventListener('click', (event) => {
-                const ageGroup = card.getAttribute('data-age-group');
-                navigateToDifficultySelection(ageGroup);
+    function displayCustomWords() {
+        customWordsList.innerHTML = '';
+        customWords.forEach((word, index) => {
+            const li = document.createElement('li');
+            li.textContent = word;
+            const deleteBtn = document.createElement('button');
+            deleteBtn.textContent = 'Delete';
+            deleteBtn.classList.add('btn', 'delete-btn');
+            deleteBtn.addEventListener('click', () => {
+                customWords.splice(index, 1);
+                localStorage.setItem('customWords', JSON.stringify(customWords));
+                displayCustomWords();
             });
+            li.appendChild(deleteBtn);
+            customWordsList.appendChild(li);
         });
     }
 
+    addWordBtn.addEventListener('click', () => {
+        const newWord = customWordInput.value.trim();
+        if (newWord) {
+            customWords.push(newWord);
+            localStorage.setItem('customWords', JSON.stringify(customWords));
+            displayCustomWords();
+            customWordInput.value = '';
+        }
+    });
+
+    displayCustomWords();
+
     if (startBtn) {
-        startBtn.addEventListener('click', navigateToGame);
+        startBtn.addEventListener('click', () => {
+            startGame();
+            showGameCard();
+        });
     }
 
     if (correctBtn) {
         correctBtn.addEventListener('click', () => {
+            document.getElementById('correct-sound').play();
             score++;
             updateScore();
             showPopup();
             nextWord();
+            correctBtn.classList.add('correct-animation');
+            setTimeout(() => correctBtn.classList.remove('correct-animation'), 500);
         });
     }
 
     if (incorrectBtn) {
         incorrectBtn.addEventListener('click', () => {
+            document.getElementById('incorrect-sound').play();
             score--;  // Decrement the score
             updateScore();
-            incorrectBtn.style.backgroundColor = 'red';
-            setTimeout(() => {
-                incorrectBtn.style.backgroundColor = '';  // Revert to original color after a short delay
-            }, 500);
+            incorrectBtn.classList.add('incorrect-animation');
+            setTimeout(() => incorrectBtn.classList.remove('incorrect-animation'), 500);
             nextWord();
         });
     }
@@ -78,69 +119,53 @@ document.addEventListener('DOMContentLoaded', () => {
         pauseBtn.addEventListener('click', () => {
             isPaused = !isPaused;
             pauseBtn.textContent = isPaused ? 'Resume' : 'Pause';
+            if (isPaused) {
+                document.getElementById('background-music').pause();
+            } else {
+                document.getElementById('background-music').play();
+            }
         });
     }
 
     if (restartBtn) {
         restartBtn.addEventListener('click', () => {
             resetGame();
-            navigateToGameSetup();
         });
     }
 
-    function navigateToDifficultySelection(ageGroup) {
-        window.location.href = `difficulty.html?ageGroup=${ageGroup}`;
-    }
+    themeSelect.addEventListener('change', (event) => {
+        const theme = event.target.value;
+        document.body.className = theme; // Apply the selected theme to the body
+    });
 
-    function navigateToGameSetup() {
-        const setupCard = document.getElementById('setup-card');
-        const gameCard = document.getElementById('game-card');
-        const gameOverCard = document.getElementById('game-over-card');
-
-        if (setupCard && gameCard && gameOverCard) {
-            setupCard.style.display = 'block';
-            gameCard.style.display = 'none';
-            gameOverCard.style.display = 'none';
-        }
-    }
-
-    function navigateToGame() {
-        const setupCard = document.getElementById('setup-card');
-        const gameCard = document.getElementById('game-card');
-        const gameOverCard = document.getElementById('game-over-card');
-
-        if (setupCard && gameCard && gameOverCard) {
-            setupCard.style.display = 'none';
-            gameCard.style.display = 'block';
-            gameOverCard.style.display = 'none';
-            startGame();
-        }
-    }
-
-    function navigateToGameOver() {
-        const setupCard = document.getElementById('setup-card');
-        const gameCard = document.getElementById('game-card');
-        const gameOverCard = document.getElementById('game-over-card');
-        const finalScore = document.getElementById('final-score');
-
-        if (setupCard && gameCard && gameOverCard && finalScore) {
-            setupCard.style.display = 'none';
-            gameCard.style.display = 'none';
-            gameOverCard.style.display = 'block';
-            finalScore.textContent = `Your final score is ${score}`;
-        }
+    function showGameCard() {
+        document.getElementById('setup-card').style.display = 'none';
+        document.getElementById('game-card').style.display = 'block';
+        document.getElementById('game-over-card').style.display = 'none';
     }
 
     function startGame() {
         score = 0;
         currentWordIndex = 0;
         isPaused = false;
-        numWords = parseInt(document.getElementById('num-words').value);
+        numWords = parseInt(document.getElementById('num-words').value, 10); // Ensure numWords is correctly parsed
         difficulty = document.getElementById('difficulty').value;
-        words = siteWords[difficulty].slice(0, numWords);
+        const wordType = wordTypeSelect.value;
+        if (wordType === 'abc' || wordType === 'blending') {
+            words = shuffleArray(siteWords[wordType]);
+        } else {
+            words = siteWords[difficulty].slice(0, numWords).concat(customWords); // Include custom words
+        }
         displayWord();
         startTimer();
         updateScore();
+    }
+
+    function navigateToGameOver() {
+        document.getElementById('setup-card').style.display = 'none';
+        document.getElementById('game-card').style.display = 'none';
+        document.getElementById('game-over-card').style.display = 'block';
+        document.getElementById('final-score').textContent = `Your final score is ${score}`;
     }
 
     function displayWord() {
@@ -152,7 +177,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function startTimer() {
-        let time = 10; // 10 seconds countdown
+        let time = 10 - Math.floor(score / 10); // Reduce time as score increases
+        if (time < 5) time = 5; // Set a minimum timer value
         updateTimerDisplay(time);
         timerInterval = setInterval(() => {
             if (!isPaused) {
@@ -171,11 +197,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (timerElement) {
             timerElement.textContent = `00:${time.toString().padStart(2, '0')}`;
             if (time > 5) {
-                timerElement.style.color = 'green';
+                timerElement.className = 'timer green';
             } else if (time > 2) {
-                timerElement.style.color = 'yellow';
+                timerElement.className = 'timer yellow';
             } else {
-                timerElement.style.color = 'red';
+                timerElement.className = 'timer red';
             }
         }
     }
@@ -196,6 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentWordIndex++;
         displayWord();
         resetTimer();
+        checkAchievements(); // Check achievements after each word
     }
 
     function resetGame() {
@@ -205,6 +232,8 @@ document.addEventListener('DOMContentLoaded', () => {
         isPaused = false;
         updateScore();
         updateTimerDisplay(10);
+        displayWord();
+        showSetupCard();
     }
 
     function showPopup() {
@@ -222,5 +251,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    navigateToGameSetup(); // Initial setup
+    function checkAchievements() {
+        if (score === 10 && !achievements.includes('First 10')) {
+            achievements.push('First 10');
+            alert('Achievement Unlocked: First 10!');
+        }
+        if (score === 20 && !achievements.includes('Second 20')) {
+            achievements.push('Second 20');
+            alert('Achievement Unlocked: Second 20!');
+        }
+        // Add more achievements as needed
+    }
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function showSetupCard() {
+        document.getElementById('setup-card').style.display = 'block';
+        document.getElementById('game-card').style.display = 'none';
+        document.getElementById('game-over-card').style.display = 'none';
+    }
+
+    showSetupCard(); // Initial setup
 });

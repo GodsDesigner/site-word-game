@@ -130,7 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (restartBtn) {
         restartBtn.addEventListener('click', () => {
             resetGame();
-            navigateToGameSetup();
         });
     }
 
@@ -234,9 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateScore();
         updateTimerDisplay(10);
         displayWord();
-        document.getElementById('setup-card').style.display = 'block';
-        document.getElementById('game-card').style.display = 'none';
-        document.getElementById('game-over-card').style.display = 'none';
+        showSetupCard();
     }
 
     function showPopup() {
@@ -274,11 +271,11 @@ document.addEventListener('DOMContentLoaded', () => {
         return array;
     }
 
-    function navigateToGameSetup() {
+    function showSetupCard() {
         document.getElementById('setup-card').style.display = 'block';
         document.getElementById('game-card').style.display = 'none';
         document.getElementById('game-over-card').style.display = 'none';
     }
 
-    navigateToGameSetup(); // Initial setup
+    showSetupCard(); // Initial setup
 });
