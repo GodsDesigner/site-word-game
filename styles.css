@@ -159,6 +159,25 @@ label {
     color: #007BFF;
 }
 
+@media (min-width: 600px) {
+    .card {
+        width: 70%;
+    }
+
+    button {
+        width: auto;
+        display: inline-block;
+        margin: 5px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .card {
+        width: 50%;
+    }
+}
+
+
 select {
     width: 100%;
     padding: 10px;
