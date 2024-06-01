@@ -154,8 +154,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const wordType = wordTypeSelect.value;
         if (wordType === 'abc') {
             words = shuffleArray(siteWords[wordType]);
+        } else if (wordType === 'blending') {
+            words = shuffleArray(siteWords[wordType]);
         } else {
-            words = siteWords[wordType].slice(0, numWords).concat(customWords); // Include custom words
+            words = siteWords[difficulty].slice(0, numWords).concat(customWords); // Include custom words
         }
         displayWord();
         startTimer();
