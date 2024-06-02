@@ -340,7 +340,13 @@ footer {
     }
 
     nav ul li {
-        margin: 5px 0;
+        display: inline;
+        margin-right: 20px;
+    }
+
+    nav ul li.toggle-container {
+        display: flex;
+        align-items: center;
     }
 
     h1 {
@@ -484,4 +490,7 @@ footer {
     color: white; /* Changing the text color to contrast with the red background */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adding a subtle shadow for depth */
     margin-left: -11px; /* Move the input field 10px to the left */
+}
+#volume-checked {
+    margin-left: 5px;
 }

@@ -10,6 +10,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const customWordsList = document.getElementById('custom-words-list');
     const wordTypeSelect = document.getElementById('word-type');
     const backToSetupNav = document.getElementById('back-to-setup-nav');
+    const volumeToggle = document.getElementById('volume-toggle');
+    const correctSound = document.getElementById('correct-sound');
+    const incorrectSound = document.getElementById('incorrect-sound');
+
+    let isSoundOn = true;
+
+    volumeToggle.addEventListener('change', () => {
+        isSoundOn = volumeToggle.checked;
+        toggleSound();
+    });
+
+    function toggleSound() {
+        if (isSoundOn) {
+            correctSound.volume = 1.0;
+            incorrectSound.volume = 1.0;
+        } else {
+            correctSound.volume = 0.0;
+            incorrectSound.volume = 0.0;
+        }
+    }
 
     let words = [];
     let currentWordIndex = 0;
@@ -102,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (correctBtn) {
         correctBtn.addEventListener('click', () => {
-            document.getElementById('correct-sound').play();
+            if (isSoundOn) document.getElementById('correct-sound').play();
             score++;
             updateScore();
             showPopup();
@@ -114,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (incorrectBtn) {
         incorrectBtn.addEventListener('click', () => {
-            document.getElementById('incorrect-sound').play();
+            if (isSoundOn) document.getElementById('incorrect-sound').play();
             score--;  // Decrement the score
             updateScore();
             incorrectBtn.classList.add('incorrect-animation');
