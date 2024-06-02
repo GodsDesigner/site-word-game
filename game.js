@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const customWordInput = document.getElementById('custom-word');
     const customWordsList = document.getElementById('custom-words-list');
     const wordTypeSelect = document.getElementById('word-type');
+    const backToSetupNav = document.getElementById('back-to-setup-nav');
 
     let words = [];
     let currentWordIndex = 0;
@@ -92,6 +93,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    if (backToSetupNav) {
+        backToSetupNav.addEventListener('click', (event) => {
+            event.preventDefault();
+            navigateToGameSetup();
+        });
+    }
+
     if (correctBtn) {
         correctBtn.addEventListener('click', () => {
             document.getElementById('correct-sound').play();
@@ -159,6 +167,10 @@ document.addEventListener('DOMContentLoaded', () => {
         displayWord();
         startTimer();
         updateScore();
+    }
+
+    function navigateToGameSetup() {
+        showSetupCard();
     }
 
     function navigateToGameOver() {

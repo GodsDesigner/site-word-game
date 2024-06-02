@@ -64,7 +64,7 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 90%;
+    width: 100%;
     max-width: 800px;
     padding: 20px;
     height: 100%;
@@ -97,7 +97,7 @@ label {
     color: #007BFF;
 }
 
-select {
+select, input[type="text"] {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -461,17 +461,27 @@ footer {
 
 .add-custom input,
 .add-custom button {
-    width: 100%;
+    width: 1000%;
     margin-top: 10px;
 }
 
 @media (max-width: 480px) {
     .add-custom {
-        padding: 15px;
+        padding: 20px;
     }
 
     .add-custom input,
     .add-custom button {
         font-size: 0.9em;
     }
+}
+.input-field {
+    width: 80%;
+    padding: 10px; /* Adding padding for better spacing inside the input */
+    border: 2px solid #ccc; /* Adding a border for better visibility */
+    border-radius: 6px; /* Rounding the corners */
+    font-size: 1em; /* Ensuring the font size is readable */
+    color: white; /* Changing the text color to contrast with the red background */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adding a subtle shadow for depth */
+    margin-left: -11px; /* Move the input field 10px to the left */
 }
