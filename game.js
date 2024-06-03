@@ -69,10 +69,16 @@ document.addEventListener('DOMContentLoaded', () => {
             "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
         ],
         blending: [
-            "at", "bat", "cat", "hat", "rat", "sat", "mat", "fat", "pat", "vat",
-            "can", "fan", "man", "pan", "tan", "van", "ran", "ban", "plan", "scan",
-            "blend", "black", "block", "blush", "clap", "clean", "clip", "clock", "flag", "flash",
-            "flip", "glad", "glass", "glow", "plan", "plant", "plum", "slide", "slip", "slim"
+            "bl - blue", "br - brown", "cl - clean", "cr - crab", "dr - drum",
+            "fl - flag", "fr - frog", "gl - glue", "gr - grape", "pl - plant",
+            "pr - prize", "sc - scarf", "sk - skip", "sl - slide", "sm - smile",
+            "sn - snail", "sp - spoon", "st - star", "sw - swim", "tr - tree",
+            "tw - twin", "scr - scrub", "shr - shrimp", "spl - splash", "spr - spring",
+            "squ - squash", "str - street", "thr - three", "br - brush", "fr - fry",
+            "pl - plane", "tr - train", "ch - chair", "sh - ship", "th - think",
+            "wh - whale", "bl - block", "fl - flower", "gl - glow", "cl - clock",
+            "sl - sleep", "br - bread", "cr - crash", "dr - dress", "gr - green",
+            "pr - press", "sc - school", "sk - skate", "sp - space", "st - stone"
         ]
     };
 
