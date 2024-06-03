@@ -43,27 +43,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const siteWords = {
         easy: [
-            "cat", "dog", "sun", "moon", "star", "ball", "book", "car", "hat", "pen",
-            "a", "and", "away", "big", "blue", "can", "come", "down", "find", "for",
-            "fun", "go", "help", "here", "I", "in", "is", "it", "jump", "little", "look",
-            "make", "me", "my", "not", "one", "play", "red", "run", "said", "see", "the",
-            "three", "to", "two", "up", "we", "where", "yellow", "you"
+            "the", "of", "and", "a", "to", "in", "is", "you", "that", "it",
+            "he", "was", "for", "on", "are", "as", "with", "his", "they", "I",
+            "at", "be", "this", "have", "from", "or", "one", "had", "by", "word",
+            "but", "not", "what", "all", "were", "we", "when", "your", "can", "said",
+            "there", "use", "an", "each", "which", "she", "do", "how", "their", "if",
+            "will", "up", "other", "about", "out", "many", "then", "them", "these", "so",
+            "some", "her", "would", "make", "like", "him", "into", "time", "has", "look",
+            "two", "more", "write", "go", "see", "number", "no", "way", "could", "people",
+            "my", "than", "first", "water", "been", "call", "who", "oil", "its", "now",
+            "find", "long", "down", "day", "did", "get", "come", "made", "may", "part",
+            "over", "new", "sound", "take", "only", "little", "work", "know", "place", "year",
+            "live", "me", "back", "give", "most", "very", "after", "thing", "our", "just",
+            "name", "good", "sentence", "man", "think", "say", "great", "where", "help", "through",
+            "much", "before", "line", "right", "too", "mean", "old", "any", "same", "tell",
+            "boy", "follow", "came", "want", "show", "also", "around", "form", "three", "small",
+            "set", "put", "end", "does", "another", "well", "large", "must", "big", "even",
+            "such", "because", "turn", "here", "why", "ask", "went", "men", "read", "need",
+            "land", "different", "home", "us", "move", "try", "kind", "hand", "picture", "again",
+            "change", "off", "play", "spell", "air", "away", "animal", "house", "point", "page",
+            "letter", "mother", "answer", "found", "study", "still", "learn", "should", "America", "world"
         ],
         medium: [
-            "apple", "banana", "cherry", "date", "elderberry", "fig", "grape", "honeydew", "kiwi", "lemon",
-            "after", "again", "air", "also", "animal", "another", "any", "around", "ask", "back",
-            "because", "before", "boy", "change", "does", "end", "every", "fly", "follow", "food",
-            "give", "great", "hand", "home", "just", "kind", "large", "learn", "letter", "live",
-            "man", "most", "mother", "move", "much", "name", "need", "off", "only", "open",
-            "over", "place", "read", "right", "same", "should", "show", "small", "sound", "spell"
+            "such", "because", "turn", "here", "why", "ask", "went", "men", "read", "need",
+            "land", "different", "home", "us", "move", "try", "kind", "hand", "picture", "again",
+            "change", "off", "play", "spell", "air", "away", "animal", "house", "point", "page",
+            "letter", "mother", "answer", "found", "study", "still", "learn", "should", "America", "world",
+            "high", "every", "near", "add", "food", "between", "own", "below", "country", "plant",
+            "last", "school", "father", "keep", "tree", "never", "start", "city", "earth", "eyes",
+            "light", "thought", "head", "under", "story", "saw", "left", "don't", "few", "while",
+            "along", "might", "close", "something", "seem", "next", "hard", "open", "example", "begin",
+            "life", "always", "those", "both", "paper", "together", "got", "group", "often", "run",
+            "important", "until", "children", "side", "feet", "car", "mile", "night", "walk", "white",
+            "sea", "began", "grow", "took", "river", "four", "carry", "state", "once", "book",
+            "hear", "stop", "without", "second", "later", "miss", "idea", "enough", "eat", "face"
         ],
         hard: [
-            "elephant", "giraffe", "hippopotamus", "rhinoceros", "crocodile", "pterodactyl", "tyrannosaurus", "triceratops", "stegosaurus", "brachiosaurus",
-            "america", "answer", "different", "does", "even", "found", "going", "house", "large", "letter",
-            "little", "mother", "much", "name", "number", "people", "place", "school", "sound", "spell",
-            "still", "study", "such", "take", "thank", "thing", "think", "together", "try", "turn",
-            "under", "until", "very", "walk", "watch", "water", "were", "while", "which", "world",
-            "would", "write", "year"
+            "watch", "far", "Indian", "real", "almost", "let", "above", "girl", "sometimes", "mountains",
+            "cut", "young", "talk", "soon", "list", "song", "being", "leave", "family", "it's",
+            "body", "music", "color", "stand", "sun", "questions", "fish", "area", "mark", "dog",
+            "horse", "birds", "problem", "complete", "room", "knew", "since", "ever", "piece", "told",
+            "usually", "didn't", "friends", "easy", "heard", "order", "red", "door", "sure", "become",
+            "top", "ship", "across", "today", "during", "short", "better", "best", "however", "low",
+            "hours", "black", "products", "happened", "whole", "measure", "remember", "early", "waves", "reached",
+            "listen", "wind", "rock", "space", "covered", "fast", "several", "hold", "himself", "toward",
+            "five", "step", "morning", "passed", "vowel", "true", "hundred", "against", "pattern", "numeral",
+            "table", "north", "slowly", "money", "map", "farm", "pulled", "draw", "voice", "seen",
+            "cold", "cried", "plan", "notice", "south", "sing", "war", "ground", "fall", "king"
         ],
         abc: [
             "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
@@ -79,8 +105,33 @@ document.addEventListener('DOMContentLoaded', () => {
             "wh - whale", "bl - block", "fl - flower", "gl - glow", "cl - clock",
             "sl - sleep", "br - bread", "cr - crash", "dr - dress", "gr - green",
             "pr - press", "sc - school", "sk - skate", "sp - space", "st - stone"
-        ]
+        ],
     };
+
+    function showSuccessMessage(message) {
+        const successMessage = document.getElementById('success-message');
+        const successText = document.getElementById('success-text');
+        successText.textContent = message;
+        successMessage.classList.add('show');
+
+        // Play success sound
+        const successSound = new Audio('path/to/success-sound.mp3');
+        successSound.play();
+
+        // Show confetti animation
+        for (let i = 0; i < 50; i++) {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            document.body.appendChild(confetti);
+            setTimeout(() => {
+                confetti.remove();
+            }, 2000);
+        }
+
+        setTimeout(() => {
+            successMessage.classList.remove('show');
+        }, 2000);
+    }
 
     function displayCustomWords() {
         customWordsList.innerHTML = '';
@@ -131,7 +182,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isSoundOn) document.getElementById('correct-sound').play();
             score++;
             updateScore();
-            showPopup();
+            const messages = [
+                'Great Job! 🎉',
+                'Awesome! 🎊',
+                'Well Done! 🌟',
+                'You Got It! 🏆',
+                'Fantastic! 🎈'
+            ];
+            const randomIndex = Math.floor(Math.random() * messages.length);
+            showSuccessMessage(messages[randomIndex]);
             nextWord();
             correctBtn.classList.add('correct-animation');
             setTimeout(() => correctBtn.classList.remove('correct-animation'), 500);
@@ -188,8 +247,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (wordType === 'abc' || wordType === 'blending') {
             words = shuffleArray(siteWords[wordType]);
         } else {
-            words = siteWords[difficulty].slice(0, numWords).concat(customWords); // Include custom words
+            words = siteWords[difficulty].concat(customWords); // Include custom words
         }
+        words = shuffleArray(words).slice(0, numWords); // Ensure the total number of words is correct
         displayWord();
         startTimer();
         updateScore();
@@ -274,21 +334,6 @@ document.addEventListener('DOMContentLoaded', () => {
         showSetupCard();
     }
 
-    function showPopup() {
-        const messages = ["Good Job!", "Awesome!", "Well Done!", "Great!", "Keep It Up!", "Fantastic!"];
-        const randomIndex = Math.floor(Math.random() * messages.length);
-        const message = messages[randomIndex];
-        const popupMessage = document.getElementById('popup-message');
-        const popupText = document.getElementById('popup-text');
-        if (popupMessage && popupText) {
-            popupText.textContent = message;
-            popupMessage.classList.add('show');
-            setTimeout(() => {
-                popupMessage.classList.remove('show');
-            }, 2000); // Popup will disappear after 2 seconds
-        }
-    }
-
     function checkAchievements() {
         if (score === 10 && !achievements.includes('First 10')) {
             achievements.push('First 10');
@@ -317,3 +362,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     showSetupCard(); // Initial setup
 });
+

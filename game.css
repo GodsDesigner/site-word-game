@@ -188,18 +188,21 @@ select, input[type="text"] {
     font-size: 1.5em;
 }
 
+/* Popup message div */
 .popup {
     display: none;
     position: fixed;
-    right: 20%; /* Move it closer to the top */
-    left: 70%;
-    transform: translate(-50%, -20%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     color: #333;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
-    font-size: 1.2em;
+    font-size: 1.5em;
     z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     animation: fadeInOut 2s ease-in-out;
 }
 
@@ -208,9 +211,38 @@ select, input[type="text"] {
     10%, 90% { opacity: 1; }
 }
 
+.success-message {
+    color: #4CAF50;
+}
+
 .show {
     display: block;
 }
+
+/* Confetti animation */
+@keyframes confetti {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100vh); }
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #ffcc00;
+    animation: confetti 2s ease-in-out infinite;
+}
+
+.confetti:nth-child(odd) {
+    background-color: #00ccff;
+    animation-duration: 3s;
+}
+
+.confetti:nth-child(even) {
+    background-color: #ff6699;
+    animation-duration: 2.5s;
+}
+
 
 footer {
     margin-top: auto;

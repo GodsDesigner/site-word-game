@@ -26,11 +26,13 @@
             <div id="setup-card" class="card">
                 <h2>Game Setup</h2>
                 <label for="num-words">Number of Words:</label>
-                <select id="num-words">
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="30">30</option>
-                </select>
+                    <select id="num-words">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
                 <label for="difficulty">Difficulty:</label>
                 <select id="difficulty">
                     <option value="easy">Easy</option>
@@ -78,8 +80,8 @@
                 <p id="final-score"></p>
                 <button id="restart-btn" class="btn">Restart Game</button>
             </div>
-            <div id="popup-message" class="popup">
-                <p id="popup-text"></p>
+            <div id="success-message" class="popup success-message">
+                <p id="success-text"></p>
             </div>
         </div>
     </main>
