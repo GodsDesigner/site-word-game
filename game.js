@@ -117,8 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "cold", "cried", "plan", "notice", "south", "sing", "war", "ground", "fall", "king"
         ],
         abc: [
-            "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
-            "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
+            "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
         ],
         blending: [
             "bl - blue", "br - brown", "cl - clean", "cr - crab", "dr - drum",
@@ -204,11 +203,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (correctBtn) {
-        correctBtn.addEventListener('click', handleCorrect);
+        correctBtn.addEventListener('click', () => {
+            if (isSoundOn) document.getElementById('correct-sound').play();
+            score++;
+            updateScore();
+            const messages = [
+                'Great Job! 🎉',
+                'Awesome! 🎊',
+                'Well Done! 🌟',
+                'You Got It! 🏆',
+                'Fantastic! 🎈'
+            ];
+            const randomIndex = Math.floor(Math.random() * messages.length);
+            showSuccessMessage(messages[randomIndex]);
+            nextWord();
+            correctBtn.classList.add('correct-animation');
+            setTimeout(() => correctBtn.classList.remove('correct-animation'), 500);
+        });
     }
 
     if (incorrectBtn) {
-        incorrectBtn.addEventListener('click', handleIncorrect);
+        incorrectBtn.addEventListener('click', () => {
+            if (isSoundOn) document.getElementById('incorrect-sound').play();
+            score--;  // Decrement the score
+            updateScore();
+            incorrectBtn.classList.add('incorrect-animation');
+            setTimeout(() => incorrectBtn.classList.remove('incorrect-animation'), 500);
+            nextWord();
+        });
     }
 
     if (pauseBtn) {
@@ -247,12 +269,16 @@ document.addEventListener('DOMContentLoaded', () => {
         numWords = parseInt(document.getElementById('num-words').value, 10); // Ensure numWords is correctly parsed
         difficulty = document.getElementById('difficulty').value;
         const wordType = wordTypeSelect.value;
-        words = customWords; // Use only custom words for now
+        if (wordType === 'abc' || wordType === 'blending') {
+            words = shuffleArray(siteWords[wordType]);
+        } else {
+            words = siteWords[difficulty].concat(customWords); // Include custom words
+        }
         words = shuffleArray(words).slice(0, numWords); // Ensure the total number of words is correct
         displayWord();
         startTimer();
         updateScore();
-        startListening(); // Start listening for the first word
+        startListening();
     }
 
     function navigateToGameSetup() {
