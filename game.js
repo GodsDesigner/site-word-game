@@ -278,7 +278,6 @@ document.addEventListener('DOMContentLoaded', () => {
         displayWord();
         startTimer();
         updateScore();
-        startListening();
     }
 
     function navigateToGameSetup() {
@@ -347,7 +346,6 @@ document.addEventListener('DOMContentLoaded', () => {
         displayWord();
         resetTimer();
         checkAchievements(); // Check achievements after each word
-        startListening(); // Start listening for the next word
     }
 
     function resetGame() {
